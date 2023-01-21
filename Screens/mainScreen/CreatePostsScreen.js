@@ -40,6 +40,8 @@ const CreatePostsScreen = ({ navigation }) => {
   const [isShowButton, setIsShowButton] = useState(true);
   const [region, setRegion] = useState("");
 
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -74,6 +76,11 @@ const CreatePostsScreen = ({ navigation }) => {
   const { userId, nickname } = useSelector((state) => state.auth);
 
   const takePhoto = async () => {
+    requestPermission();
+    console.log(permission);
+    if (!permission.granted) {
+      error("Not Permission");
+    }
     const photo = await camera.takePictureAsync();
     const locationGps = await Location.getCurrentPositionAsync();
     setPosition(locationGps);

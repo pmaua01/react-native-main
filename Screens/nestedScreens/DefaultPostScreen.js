@@ -45,17 +45,19 @@ const DefaultPostsScreen = ({ route, navigation }) => {
           style={{
             width: 60,
             height: 60,
-
+            backgroundColor: "#F6F6F6",
             borderRadius: 16,
             alignItems: "center",
             justifyContent: "center",
             overflow: "hidden",
           }}
         >
-          <Image
-            style={{ width: "100%", height: "100%" }}
-            source={{ uri: userCredentials.avatar }}
-          />
+          {userCredentials.avatar && (
+            <Image
+              style={{ width: "100%", height: "100%" }}
+              source={{ uri: userCredentials.avatar }}
+            />
+          )}
         </View>
         <View
           style={{
@@ -92,7 +94,6 @@ const DefaultPostsScreen = ({ route, navigation }) => {
           <View
             style={{
               marginBottom: 34,
-         
             }}
           >
             <Image

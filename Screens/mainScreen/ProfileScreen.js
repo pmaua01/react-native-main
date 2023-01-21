@@ -97,7 +97,7 @@ const ProfileScreen = () => {
                 alignItems: "center",
               }}
             >
-              {userCredentials ? (
+              {userCredentials.avatar ? (
                 <Delete style={{ width: 25, height: 25 }} />
               ) : (
                 <Addphoto />

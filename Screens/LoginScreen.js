@@ -52,23 +52,25 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHideOutInput}>
-      <View style={styles.container}>
-        <ImageBackground
-          source={require(`../images/PhotoBg.jpg`)}
-          style={styles.image}
-        >
-          <View
-            style={{
-              ...styles.register,
-
-              top: isShowKeyboard ? "50%" : "40%",
-              height: isShowKeyboard ? "50%" : "60%",
-            }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <ImageBackground
+            source={require(`../images/PhotoBg.jpg`)}
+            style={styles.image}
           >
-            <Text style={styles.registerTitle}>Войти</Text>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
+            <View
+              style={{
+                ...styles.register,
+
+                top: isShowKeyboard ? "50%" : "40%",
+                height: isShowKeyboard ? "50%" : "60%",
+              }}
             >
+              <Text style={styles.registerTitle}>Войти</Text>
+
               <View styles={styles.form}>
                 <View style={{ marginBottom: 16 }}>
                   <TextInput
@@ -134,10 +136,10 @@ export const LoginScreen = ({ navigation }) => {
                   </TouchableOpacity>
                 )}
               </View>
-            </KeyboardAvoidingView>
-          </View>
-        </ImageBackground>
-      </View>
+            </View>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };

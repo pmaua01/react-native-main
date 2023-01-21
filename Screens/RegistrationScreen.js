@@ -45,6 +45,8 @@ export const RegistrationScreen = ({ navigation }) => {
   const [photo, setPhoto] = useState("");
   const [camera, setCamera] = useState(null);
 
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+
   const dispatch = useDispatch();
 
   const keyboardHideOutInput = () => {
@@ -53,6 +55,7 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   const onLogin = async () => {
+    await uploadFoto();
     await dispatch(authOnRegister(state));
     setState(initialState);
   };
@@ -64,6 +67,7 @@ export const RegistrationScreen = ({ navigation }) => {
     const hide = Keyboard.addListener("keyboardDidHide", () =>
       setIsShowKeyboard(false)
     );
+
     return () => {
       show.remove();
       hide.remove();
@@ -79,6 +83,7 @@ export const RegistrationScreen = ({ navigation }) => {
     const storageRef = ref(storage, `avatarImage/${id}`);
     await uploadBytes(storageRef, file);
     const downloadFoto = await getDownloadURL(storageRef);
+    console.log("downloadFoto", downloadFoto);
     setState((prevState) => ({
       ...prevState,
       avatar: downloadFoto,
@@ -86,9 +91,15 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   const takePhoto = async () => {
+    requestPermission();
+    console.log(permission);
+    if (!permission.granted) {
+      error("Not Permission");
+    }
     const photo = await camera.takePictureAsync();
+    console.log("Photo on register screen", photo);
     setPhoto(photo.uri);
-    uploadFoto();
+    // uploadFoto();
   };
 
   return (
