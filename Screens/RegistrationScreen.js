@@ -96,10 +96,13 @@ export const RegistrationScreen = ({ navigation }) => {
     if (!permission.granted) {
       error("Not Permission");
     }
-    const photo = await camera.takePictureAsync();
-    console.log("Photo on register screen", photo);
-    setPhoto(photo.uri);
-    // uploadFoto();
+    try {
+      const photo = await camera.takePictureAsync();
+      console.log("Photo on register screen", photo);
+      setPhoto(photo.uri);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (

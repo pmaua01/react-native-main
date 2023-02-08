@@ -34,14 +34,8 @@ export default function App() {
     return null;
   }
   return (
-    // <View
-    //   style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-    //   onLayout={onLayoutRootView}
-    // >
-    //   <Text>TEST</Text>
-    // </View>
-    <Provider store={store} onLayout={onLayoutRootView}>
-      <Main />
-    </Provider>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <Provider store={store}>{/* <Main /> */}</Provider>
+    </View>
   );
 }
